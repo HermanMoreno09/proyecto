@@ -3,16 +3,24 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AuthForm.css";  
 
-// Definir la URL base del backend (mejor si lo pones en variables de entorno)
-const API_BASE_URL ="https://backend-n8hs.onrender.com";
-
+// Usa el dominio de tu backend desplegado en Render
+const API_BASE_URL = "https://backend-n8hs.onrender.com";
 
 function AuthForm() {
   const [modo, setModo] = useState("login");
   const [formData, setFormData] = useState({ nombre: "", correo: "", contrasena: "" });
   const navigate = useNavigate();
 
-  // ... (keep the rest of your existing code until handleSubmit)
+  const showAlerta = (title, text, icon = "info") => {
+    Swal.fire({
+      icon: icon,
+      title: title,
+      text: text,
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,13 +40,79 @@ function AuthForm() {
         body: JSON.stringify(payload),
       });
 
-      // ... (rest of your existing handleSubmit code)
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message);
+
+      showAlerta("¡Éxito!", data.message, "success");
+
+      if (modo === "login") {
+        localStorage.setItem("usuario", JSON.stringify(data.usuario));
+        navigate("/dashboard"); // Ajusta según tus rutas
+      } else if (modo === "registro") {
+        setFormData({ nombre: "", correo: "", contrasena: "" });
+        setModo("login");
+      }
     } catch (error) {
-      // ... (keep your existing error handling)
+      if (error.message.includes("Correo o contraseña incorrectos")) {
+        showAlerta("Error de autenticación", "El correo o la contraseña son incorrectos.", "error");
+      } else {
+        showAlerta("Error", error.message, "error");
+      }
     }
   };
 
-  // ... (keep the rest of your component code)
+  return (
+    <div className="auth-wrapper">
+      <div className="auth-card">
+        <h2 className="text-center text-dark">
+          {modo === "login" ? "Iniciar sesión" : "Registro"}
+        </h2>
+        <form onSubmit={handleSubmit}>
+          {modo === "registro" && (
+            <div className="mb-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Nombre"
+                value={formData.nombre}
+                onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
+                required
+              />
+            </div>
+          )}
+          <div className="mb-3">
+            <input
+              type="email"
+              className="form-control"
+              placeholder="Correo"
+              value={formData.correo}
+              onChange={(e) => setFormData({ ...formData, correo: e.target.value })}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Contraseña"
+              value={formData.contrasena}
+              onChange={(e) => setFormData({ ...formData, contrasena: e.target.value })}
+              required
+            />
+          </div>
+          <button type="submit" className="btn btn-secondary w-100 mb-3">
+            {modo === "login" ? "Ingresar" : "Registrar"}
+          </button>
+        </form>
+        <button
+          className="btn btn-outline-light w-100"
+          onClick={() => setModo(modo === "login" ? "registro" : "login")}
+        >
+          Cambiar a {modo === "login" ? "Registro" : "Login"}
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export default AuthForm;
