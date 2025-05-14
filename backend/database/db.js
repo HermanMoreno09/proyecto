@@ -1,10 +1,11 @@
-/*import { Sequelize } from "sequelize";
+import { Sequelize } from "sequelize";
 const db = new Sequelize("crm_servicios", "root", "", {
     host: "localhost",
     dialect: "mysql"
 })
 
-export default db*/
+export default db
+/*
 const db = new Sequelize(
   process.env.MYSQL_DATABASE,
   process.env.MYSQLUSER,
@@ -16,3 +17,4 @@ const db = new Sequelize(
     logging: false
   }
 );
+*/
