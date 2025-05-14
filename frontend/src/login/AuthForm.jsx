@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "./AuthForm.css";  
 
 // Definir la URL base del backend (mejor si lo pones en variables de entorno)
-const API_BASE_URL = "https://tu-backend-en-render.onrender.com";
+const API_BASE_URL = "const API_BASE_URL = "https://backend-n8hs.onrender.com";
+
 
 function AuthForm() {
   const [modo, setModo] = useState("login");
