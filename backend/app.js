@@ -29,11 +29,9 @@ try {
     console.log(`Error de conexión: ${error}`);
 }
 
-// Configuración para Render.com
-const PORT = process.env.PORT || 8000;  // Usa el puerto de la variable de entorno o 8000 por defecto
-const HOST = process.env.HOST || '0.0.0.0';  // Escucha en todas las interfaces de red
+const PORT = process.env.PORT || 8000;
 
-// Servidor activo
-app.listen(PORT, HOST, () => {
-    console.log(`Servidor corriendo en http://${HOST}:${PORT}/`);
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
+
