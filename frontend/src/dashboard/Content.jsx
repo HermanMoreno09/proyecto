@@ -22,7 +22,6 @@ import ShowSeguimientos from '../seguimiento/ShowSeguimientos';
 import ShowVisitas from '../calendario/ShowVisitas';
 import CreateVisita from '../calendario/CreateVisita';
 import EditVisita from '../calendario/EditVisita';
-import ShowCliente from '../cliente/ShowCliente';
 
 function Content() {
   return (
