@@ -7,7 +7,7 @@ import Tables from './Tables';
 import ShowCotizaciones from '../cotizaciones/ShowCotizaciones';
 import EditCotizacion from '../cotizaciones/EditCotizaciones';
 import CreateCotizacion from '../cotizaciones/CreateCotizaciones';
-import ShowCliente from '../Cliente/ShowCliente';
+import ShowCliente from '../cliente/ShowCliente';
 import EditCliente from '../Cliente/EditCliente';
 import CreateCliente from '../Cliente/CreateCliente';
 import ShowCotizacionItems from "../item/ShowCotizacionItems";
@@ -22,6 +22,7 @@ import ShowSeguimientos from '../seguimiento/ShowSeguimientos';
 import ShowVisitas from '../calendario/ShowVisitas';
 import CreateVisita from '../calendario/CreateVisita';
 import EditVisita from '../calendario/EditVisita';
+import ShowCliente from '../cliente/ShowCliente';
 
 function Content() {
   return (
