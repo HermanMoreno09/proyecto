@@ -32,7 +32,7 @@ function App() {
           }
         />
         <Route
-          path="/prueba"
+          path="/*"
           element={
             <div className="">
               <div className="" />
